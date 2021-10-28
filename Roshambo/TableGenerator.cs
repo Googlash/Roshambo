@@ -6,7 +6,7 @@ namespace Roshambo
 {
     class TableGenerator
     {
-        private ConsoleTable winnersTable;
+        private readonly ConsoleTable winnersTable;
 
         public TableGenerator(string[] moves)
         {

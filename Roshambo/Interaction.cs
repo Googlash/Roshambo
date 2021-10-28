@@ -10,12 +10,27 @@ namespace Roshambo
     {
         static public void PrintMenu(string[] moves)
         {
-            for (int i = 0; i < moves.Length; i++)
-                Console.WriteLine("{0})" + moves[i], i + 1);
-            Console.WriteLine("0) - exit ");
-            Console.WriteLine("?) - help ");
+            foreach (string move in moves)
+                Console.WriteLine(move);
+            Console.WriteLine("0 - exit ");
+            Console.WriteLine("? - help ");
         }
 
-        static public string GetPlauerChoice(string mo)
+        static public void PrintInvalidInputWarning() =>
+            Console.WriteLine("Enter odd number of moves ...");
+
+        static public void PrintUnknownMoveWorning() =>
+            Console.WriteLine("This move is not definded !");
+
+        //Return null if move is not definded
+        static public string GetPlayerMove(Moves moves)
+        {
+            Console.WriteLine("Enter your move ...");
+            string move = Console.ReadLine();
+            if (moves.CheckValidateMove(move) || move == "?" || move == "0")
+                return move;
+            else
+                return null;
+        }
     }
 }

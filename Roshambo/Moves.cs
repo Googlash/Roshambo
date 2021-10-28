@@ -27,9 +27,9 @@ namespace Roshambo
             return secondMove;
         }
 
-        public bool CheckValidateInput(string firstMove, string secondMove)
+        public bool CheckValidateMove(string move)
         {
-            return moves.Contains(firstMove) && moves.Contains(secondMove);
+            return moves.Contains(move);
         }
     }
 }
