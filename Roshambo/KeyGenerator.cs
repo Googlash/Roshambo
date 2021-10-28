@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Security.Cryptography;
+
+namespace Roshambo
+{
+    class KeyGenerator
+    {
+        private string key = "";
+
+        public KeyGenerator()
+        {
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+
+            byte[] byteKey = new byte[16];
+
+            rng.GetBytes(byteKey);
+
+            foreach (byte item in byteKey)
+                key += item.ToString("X");
+        }
+
+        public string GetRandomMove(string[] moves)
+        {
+            return moves[RandomNumberGenerator.GetInt32(moves.Length)];
+        }
+
+        public string Key 
+        {get => key; }
+    }
+}
