@@ -8,7 +8,7 @@ namespace Roshambo
 {
     class Moves
     {
-        private LinkedList<string> moves;
+        public readonly LinkedList<string> moves;
 
         public Moves(string[] moves) =>
             this.moves = new LinkedList<string>(moves);
@@ -16,20 +16,12 @@ namespace Roshambo
         public string DetermineWinner(string firstMove, string secondMove)
         {
             LinkedListNode<string> node = moves.Find(firstMove).Next;
-
             if (firstMove == secondMove)
-                return "Draw !";
-
+                return "Frendship ";
             for (int i = 0; i < moves.Count / 2; i++, node = node.Next ?? moves.First)
                 if (node.Value.Equals(secondMove))
-                    return firstMove;
-
-            return secondMove;
-        }
-
-        public bool CheckValidateMove(string move)
-        {
-            return moves.Contains(move);
+                    return "You ";
+            return "PC ";
         }
     }
 }

@@ -14,9 +14,7 @@ namespace Roshambo
         public HmacGenerator(string key, string move)
         {
             HMACSHA256 hmac = new HMACSHA256(Encoding.Default.GetBytes(key));
-
             hmac.ComputeHash(Encoding.Default.GetBytes(move));
-
             foreach (byte item in hmac.Hash)
                 hmacHex += item.ToString("X");
         }

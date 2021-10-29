@@ -10,15 +10,13 @@ namespace Roshambo
     class KeyGenerator
     {
         private string key = "";
+        private const int keyLength = 128;
 
         public KeyGenerator()
         {
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-
-            byte[] byteKey = new byte[16];
-
+            byte[] byteKey = new byte[keyLength / 8];
             rng.GetBytes(byteKey);
-
             foreach (byte item in byteKey)
                 key += item.ToString("X");
         }

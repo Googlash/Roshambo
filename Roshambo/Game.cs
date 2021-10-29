@@ -24,34 +24,34 @@ namespace Roshambo
                 hmac = new HmacGenerator(key.Key, pcMove);
         }
 
-        public void StartGame(string[] moves)
+        public void StartGame()
         {
-            Console.WriteLine("New game !");
-            Console.WriteLine("HMAC - {0}", hmac.HmacHex);
-            Console.WriteLine("Available move: ");
-            Interaction.PrintMenu(moves);
+            PrintBasicInterface();
             userMove = Interaction.GetPlayerMove(this.moves);
             if (userMove != null)
             {
                 if (userMove == "?")
                     newGenerator.printTable();
                 else if (userMove == "0")
-                { }
+                    Interaction.PrintMessage("Game was off!");
                 else
-                {
-                    Console.WriteLine("Your move - {0} ", userMove);
-                    Console.WriteLine("PC move - {0} ", pcMove);
-                    if (userMove == pcMove)
-                        Console.WriteLine("Draw !");
-                    else if (this.moves.DetermineWinner(userMove, pcMove) == userMove)
-                        Console.WriteLine("You won !!!");
-                    else 
-                        Console.WriteLine("PC won ");
-                    Console.WriteLine("HMAC key = {0}", key.Key);
-                }
+                    PrintGameResult();
             }
             else
                 Interaction.PrintUnknownMoveWorning();
+        }
+
+        private void PrintBasicInterface()
+        {
+            Interaction.PrintMessage("New game !\nHMAC - " + hmac.HmacHex + "\nAvailable move: ");
+            Interaction.PrintMenu(moves.moves);
+        }
+
+        private void PrintGameResult()
+        {
+            Interaction.PrintMessage("Your move - " + userMove + "\nPC move - " + pcMove);
+            Interaction.PrintMessage(this.moves.DetermineWinner(userMove, pcMove) + "won !");
+            Interaction.PrintMessage("HMAC key = " + key.Key);
         }
     }
 }
